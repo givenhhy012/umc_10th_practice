@@ -1,4 +1,4 @@
 package com.example.umc10th.domain.mission.service;
 
-public interface MissionService {
+public class MissionServiceImpl {
 }
