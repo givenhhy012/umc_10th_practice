@@ -3,6 +3,7 @@ package com.example.umc10th.domain.mission.controller;
 import com.example.umc10th.domain.mission.dto.MissionReqDTO;
 import com.example.umc10th.domain.mission.dto.MissionResDTO;
 import com.example.umc10th.domain.mission.exception.code.MissionSuccessCode;
+import com.example.umc10th.domain.mission.service.MissionService;
 import com.example.umc10th.global.apiPayload.ApiResponse;
 import com.example.umc10th.global.apiPayload.code.BaseSuccessCode;
 import lombok.RequiredArgsConstructor;
@@ -19,16 +20,20 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api")
 public class MissionController {
 
+    private final MissionService missionService;
+
     // 미션 목록 조회 (진행중 / 진행 완료)
     @GetMapping("/missions")
     public ApiResponse<MissionResDTO.GetList> getMissions(
             @RequestParam Long regionId,
+            @RequestParam Long userId,
             @RequestParam(required = false) Long cursor,
             @RequestParam(defaultValue = "10") Integer limit,
             @RequestParam String isComplete
     ) {
+        MissionResDTO.GetList result = missionService.getMissions(regionId, userId, cursor, limit, isComplete);
         BaseSuccessCode code = MissionSuccessCode.LIST_OK;
-        return ApiResponse.onSuccess(code, null);
+        return ApiResponse.onSuccess(code, result);
     }
 
     // 미션 성공 처리

@@ -1,4 +1,4 @@
-package com.example.umc10th.domain.mission.entity;
+package com.example.umc10th.domain.review.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -11,13 +11,17 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "region")
-public class Region {
+@Table(name = "reply")
+public class Reply {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "region_name", nullable = false)
-    private String regionName;
+    @Column(name = "reply_body", nullable = false)
+    private String replyBody;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "review_id", nullable = false)
+    private Review review;
 }
