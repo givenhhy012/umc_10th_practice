@@ -23,4 +23,29 @@ public class ReviewConverter {
                 .createdAt(review.getCreatedAt())
                 .build();
     }
+
+    // 내 리뷰 조회
+    public static ReviewResDTO.GetMyReviewItem toGetMyReviewItem(Review review) {
+        User user = review.getUser();
+        Store store = review.getStore();
+
+        String reply = review.getReply() != null
+                ? review.getReply().getReplyBody()
+                : null;
+
+
+        return ReviewResDTO.GetMyReviewItem.builder()
+                .reviewId(review.getId())
+                .reviewBody(review.getReviewBody())
+                .rate(review.getRate())
+                .createdAt(review.getCreatedAt())
+                .updatedAt(review.getUpdatedAt())
+                .userNickName(user.getNickName())
+                .storeId(store.getId())
+                .storeName(store.getStoreName())
+                .reply(reply)
+                .build();
+    }
+
+    //
 }

@@ -6,13 +6,9 @@ import com.example.umc10th.domain.review.exception.code.ReviewSuccessCode;
 import com.example.umc10th.domain.review.service.ReviewService;
 import com.example.umc10th.global.apiPayload.ApiResponse;
 import com.example.umc10th.global.apiPayload.code.BaseSuccessCode;
+import com.example.umc10th.global.dto.PageResDTO;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -30,6 +26,18 @@ public class ReviewController {
     ) {
         ReviewResDTO.Create result = reviewService.createReview(userId, storesId, request);
         BaseSuccessCode code = ReviewSuccessCode.CREATE_OK;
+        return ApiResponse.onSuccess(code, result);
+    }
+
+    @PostMapping("/reviews/my")
+    public ApiResponse<PageResDTO.PaginationWithCursor<ReviewResDTO.GetMyReviewItem>> getMyReview(
+            @RequestParam Integer pageSize,
+            @RequestParam(required = false) String cursor,
+            @RequestParam String query,
+            @RequestBody ReviewReqDTO.GetMyReview dto
+    ) {
+        PageResDTO.PaginationWithCursor<ReviewResDTO.GetMyReviewItem> result = reviewService.getMyReview(pageSize, cursor, query, dto);
+        BaseSuccessCode code = ReviewSuccessCode.MY_REVIEW_OK;
         return ApiResponse.onSuccess(code, result);
     }
 }

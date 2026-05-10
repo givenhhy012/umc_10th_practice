@@ -25,7 +25,7 @@ public class Review extends BaseEntity {
     private String reviewBody;
 
     @Column(name = "rate", nullable = false)
-    private Integer rate;
+    private Float rate;
 
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -35,5 +35,8 @@ public class Review extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "store_id")
     private Store store;
+
+    @OneToOne(mappedBy = "review", cascade = CascadeType.REMOVE)
+    private Reply reply;
 
 }

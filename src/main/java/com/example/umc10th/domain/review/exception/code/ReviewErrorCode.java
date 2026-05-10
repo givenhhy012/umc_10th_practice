@@ -15,6 +15,12 @@ public enum ReviewErrorCode implements BaseErrorCode {
     STORE_NOT_FOUND(HttpStatus.NOT_FOUND,
             "REVIEW404_2",
             "해당 가게를 찾을 수 없습니다."),
+
+    // BAD_REQUEST
+    QUERY_NOT_VALID(HttpStatus.BAD_REQUEST,
+            "REVIEW400_1",
+            "유효하지 않은 정렬 기준입니다."),
+
     ;
 
     private final HttpStatus status;

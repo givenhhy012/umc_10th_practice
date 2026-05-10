@@ -3,13 +3,12 @@ package com.example.umc10th.domain.mission.entity.mapping;
 import com.example.umc10th.domain.mission.entity.Mission;
 import com.example.umc10th.domain.mission.enums.MissionIsCompleted;
 import com.example.umc10th.domain.user.entity.User;
+import com.example.umc10th.global.common.BaseEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -17,14 +16,11 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "user_mission")
-public class UserMission {
+public class UserMission extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column(name = "mission_date", nullable = false)
-    private LocalDateTime missionDate;
 
     @Column(name = "is_completed", nullable = false)
     @Enumerated(EnumType.STRING)

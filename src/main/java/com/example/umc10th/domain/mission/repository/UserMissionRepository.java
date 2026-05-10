@@ -2,6 +2,7 @@ package com.example.umc10th.domain.mission.repository;
 
 import com.example.umc10th.domain.mission.entity.mapping.UserMission;
 import com.example.umc10th.domain.mission.enums.MissionIsCompleted;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -37,5 +38,21 @@ public interface UserMissionRepository extends JpaRepository<UserMission, Long> 
     long countByUserIdAndIsCompleted(
             @Param("userId") Long userId,
             @Param("isCompleted") MissionIsCompleted isCompleted
+    );
+
+
+    // 내 미션 조회
+    @Query("""
+            SELECT um
+            FROM UserMission um
+            JOIN FETCH um.mission m
+            JOIN FETCH m.store s
+            WHERE um.user.id = :userId
+              AND um.isCompleted = :isCompleted
+            """)
+    Page<UserMission> findUserMissionsByIdWithOffset(
+            @Param("userId") Long userId,
+            @Param("isCompleted") MissionIsCompleted isCompleted,
+            Pageable pageable
     );
 }
