@@ -9,16 +9,31 @@ import org.springframework.http.HttpStatus;
 @RequiredArgsConstructor
 public enum UserErrorCode implements BaseErrorCode {
 
-    USER_NOT_FOUND(HttpStatus.NOT_FOUND,
-            "USER404_1",
-            "해당 사용자를 찾을 수 없습니다."),
-    EMAIL_DUPLICATED(HttpStatus.CONFLICT,
-            "USER409_1",
-            "이미 가입된 이메일입니다."),
+    // 400 BAD_REQUEST
     INVALID_GENDER(HttpStatus.BAD_REQUEST,
             "USER400_1",
             "유효하지 않은 성별 값입니다."),
+    TERM_NOT_AGREED(HttpStatus.BAD_REQUEST,
+            "USER400_2",
+            "필수 약관에 동의하지 않았습니다."),
+
+    // 404 NOT_FOUND
+    USER_NOT_FOUND(HttpStatus.NOT_FOUND,
+            "USER404_1",
+            "해당 사용자를 찾을 수 없습니다."),
+    TERM_NOT_FOUND(HttpStatus.NOT_FOUND,
+            "USER404_2",
+            "존재하지 않는 약관 id입니다."),
+    FOOD_NOT_FOUND(HttpStatus.NOT_FOUND,
+            "USER404_3",
+            "존재하지 않는 음식입니다."),
+
+    // 409 CONFLICT
+    EMAIL_DUPLICATED(HttpStatus.CONFLICT,
+            "USER409_1",
+            "이미 가입된 이메일입니다."),
     ;
+
 
     private final HttpStatus status;
     private final String code;

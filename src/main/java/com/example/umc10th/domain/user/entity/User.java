@@ -49,6 +49,9 @@ public class User extends BaseEntity {
     @Column(name = "address", nullable = false)
     private String address;
 
+    @Column(name = "detail_adress")
+    private String detailAdress;
+
     @Column(name = "social_id")
     private String socialId;
 
@@ -64,4 +67,7 @@ public class User extends BaseEntity {
     private String profileUrl;
 
 
+    public void setEncodedPassword(String endcodedPassword) {
+        this.password = endcodedPassword;
+    }
 }
