@@ -106,11 +106,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserResDTO.GetInfo getMyInfo(Long userId) {
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new UserException(UserErrorCode.USER_NOT_FOUND));
-
-        return UserConverter.toGetInfoResponse(user);
+    public UserResDTO.GetInfo getMyInfo(AuthUser user) {
+        // 컨버터를 활용
+        return UserConverter.toGetInfoResponse(user.getUser());
     }
 
     // 로그인 JWT 방식
