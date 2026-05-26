@@ -46,7 +46,8 @@ public class UserController {
     public ApiResponse<UserResDTO.Login> login(
             @RequestBody UserReqDTO.Login request
     ) {
+        UserResDTO.Login result = userService.logIn(request);
         BaseSuccessCode code = UserSuccessCode.LOGIN_OK;
-        return ApiResponse.onSuccess(code, null);
+        return ApiResponse.onSuccess(code, result);
     }
 }

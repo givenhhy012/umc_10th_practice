@@ -8,4 +8,6 @@ public interface UserService {
     UserResDTO.SignUp signUp(UserReqDTO.SignUp request);
 
     UserResDTO.GetInfo getMyInfo(Long userId);
+
+    UserResDTO.Login logIn(UserReqDTO.Login request);
 }

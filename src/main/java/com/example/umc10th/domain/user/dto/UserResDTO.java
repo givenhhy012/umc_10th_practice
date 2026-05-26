@@ -25,6 +25,7 @@ public class UserResDTO {
     @Builder
     public record Login(
             Long userId,
-            String name
+            String name,
+            String accessToken
     ) {}
 }

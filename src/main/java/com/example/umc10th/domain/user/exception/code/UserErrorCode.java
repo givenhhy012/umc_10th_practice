@@ -17,6 +17,11 @@ public enum UserErrorCode implements BaseErrorCode {
             "USER400_2",
             "필수 약관에 동의하지 않았습니다."),
 
+    // 401 UNAUTHORIZED
+    LOGIN_FAILED(HttpStatus.UNAUTHORIZED,
+            "USER401_1",
+            "아이디 또는 비밀번호가 일치하지 않습니다."),
+
     // 404 NOT_FOUND
     USER_NOT_FOUND(HttpStatus.NOT_FOUND,
             "USER404_1",

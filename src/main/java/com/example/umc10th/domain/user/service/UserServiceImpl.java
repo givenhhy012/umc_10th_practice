@@ -12,6 +12,8 @@ import com.example.umc10th.domain.user.enums.TermIsMust;
 import com.example.umc10th.domain.user.exception.UserException;
 import com.example.umc10th.domain.user.exception.code.UserErrorCode;
 import com.example.umc10th.domain.user.repository.*;
+import com.example.umc10th.global.security.entity.AuthUser;
+import com.example.umc10th.global.security.util.JwtUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -30,6 +32,7 @@ public class UserServiceImpl implements UserService {
     private final UserFoodRepository userFoodRepository;
     private final FoodRepository foodRepository;
     private final PasswordEncoder passwordEncoder;
+    private final JwtUtil jwtUtil;
 
     @Override
     @Transactional
@@ -108,5 +111,22 @@ public class UserServiceImpl implements UserService {
                 .orElseThrow(() -> new UserException(UserErrorCode.USER_NOT_FOUND));
 
         return UserConverter.toGetInfoResponse(user);
+    }
+
+    // 로그인 JWT 방식
+    public UserResDTO.Login logIn(UserReqDTO.Login request){
+        // 이메일로 멤버 조회
+        User user = userRepository.findByEmail(request.email())
+                .orElseThrow(() -> new UserException(UserErrorCode.LOGIN_FAILED));
+
+        // 비밀번호 검증
+        if (!passwordEncoder.matches(request.password(), user.getPassword())) {
+            throw new UserException(UserErrorCode.LOGIN_FAILED);
+        }
+
+        // AuthMember 생성 후 토큰 발행
+        AuthUser authUser = new AuthUser(user);
+        String token = jwtUtil.createAccessToken(authUser);
+        return new UserResDTO.Login(user.getId(), user.getName(), token);
     }
 }
