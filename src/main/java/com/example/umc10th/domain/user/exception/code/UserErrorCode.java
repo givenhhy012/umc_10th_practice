@@ -16,6 +16,9 @@ public enum UserErrorCode implements BaseErrorCode {
     TERM_NOT_AGREED(HttpStatus.BAD_REQUEST,
             "USER400_2",
             "필수 약관에 동의하지 않았습니다."),
+    NOT_SUPPORT_SOCIAL_PROVIDER(HttpStatus.BAD_REQUEST,
+            "USER400_3",
+            "지원하지 않는 소셜타입입니다."),
 
     // 401 UNAUTHORIZED
     LOGIN_FAILED(HttpStatus.UNAUTHORIZED,

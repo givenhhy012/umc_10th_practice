@@ -17,8 +17,10 @@ public enum UserSuccessCode implements BaseSuccessCode {
             "성공적으로 회원가입했습니다."),
     LOGIN_OK(HttpStatus.OK,
             "USER200_2",
-            "성공적으로 로그인했습니다.")
-    ;
+            "성공적으로 로그인했습니다."),
+    SOCIAL_AUTH_OK(HttpStatus.OK,
+            "USER200_3",
+            "성공적으로 소셜 인증되었습니다.");
 
     private final HttpStatus status;
     private final String code;

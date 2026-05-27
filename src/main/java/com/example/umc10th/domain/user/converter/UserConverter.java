@@ -3,6 +3,7 @@ package com.example.umc10th.domain.user.converter;
 import com.example.umc10th.domain.user.dto.UserReqDTO;
 import com.example.umc10th.domain.user.dto.UserResDTO;
 import com.example.umc10th.domain.user.entity.User;
+import com.example.umc10th.global.security.DTO.OAuthDTO;
 
 public class UserConverter {
 
@@ -40,6 +41,16 @@ public class UserConverter {
                 .email(user.getEmail())
                 .phoneNumber(user.getPhoneNum())
                 .point(user.getUserPoint())
+                .build();
+    }
+
+    // 소셜 로그인에 사용
+    public static User toUser(OAuthDTO dto) {
+        return User.builder()
+                .email(dto.getSocialEmail())
+                .name(dto.getName())
+                .socialType(dto.getSocialType())
+                .socialId(dto.getSocialUid())
                 .build();
     }
 }

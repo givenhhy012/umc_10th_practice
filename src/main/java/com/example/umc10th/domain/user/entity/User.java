@@ -26,16 +26,16 @@ public class User extends BaseEntity {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "nick_name", nullable = false)
+    @Column(name = "nick_name")
     private String nickName;
 
     @Column(name="phone_num")
     private String phoneNum;
 
-    @Column(name = "email", nullable = false)
+    @Column(name = "email")
     private String email;
 
-    @Column(name = "password", nullable = false)
+    @Column(name = "password")
     private String password;
 
     @Column(name = "gender", nullable = false)
@@ -43,10 +43,10 @@ public class User extends BaseEntity {
     @Builder.Default
     private Gender gender = Gender.NONE;
 
-    @Column(name = "birth_date", nullable = false)
+    @Column(name = "birth_date")
     private LocalDate birthDate;
 
-    @Column(name = "address", nullable = false)
+    @Column(name = "address")
     private String address;
 
     @Column(name = "detail_adress")
@@ -59,7 +59,7 @@ public class User extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private SocialType socialType;
 
-    @Column(name = "user_point", nullable = false)
+    @Column(name = "user_point")
     @Builder.Default
     private Integer userPoint = 0;
 

@@ -28,4 +28,9 @@ public class UserResDTO {
             String name,
             String accessToken
     ) {}
+
+    @Builder
+    public record LoginResult(
+            String accessToken
+    ) {}
 }
